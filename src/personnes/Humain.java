@@ -2,15 +2,10 @@ package personnes;
 
 public class Humain {
 	String nom;
-	Niveau niveau;
-	int numClasse;
 	
 	
-	public Humain(String nom, Niveau classe,int numClasse) {
-		super();
+	public Humain(String nom) {
 		this.nom = nom;
-		this.niveau = classe;
-		this.numClasse = numClasse;
 	}
 
 
@@ -22,15 +17,9 @@ public class Humain {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
-
-	public Niveau getNiveau() {
-		return niveau;
+	
+	@Override
+	public String toString() {
+		return nom;
 	}
-
-
-	public void setNiveau(Niveau niveau) {
-		this.niveau = niveau;
-	}
-
 }
