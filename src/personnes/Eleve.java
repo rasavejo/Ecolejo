@@ -52,6 +52,20 @@ public class Eleve extends Humain {
 		nbRapprochement ++;
 		}
 	}
+	
+	public void niveauSuperieur() throws Exception {
+		switch (this.niveau) {
+			case CP : this.niveau = Niveau.CE1; 
+				break;
+			case CE1 : this.niveau = Niveau.CE2; 
+				break;
+			case CE2 : this.niveau = Niveau.CM1; 
+				break;
+			case CM1 : this.niveau = Niveau.CM2; 
+				break;
+			default : throw new Exception("Erreur pas de niveau supérieur");
+		}
+	}
 
 	public int getNiveauScolaire() {
 		return niveauScolaire;

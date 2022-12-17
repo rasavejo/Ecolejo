@@ -35,13 +35,7 @@ public class Ecole {
 		nbClasses ++;
 	}
 	
-	public Niveau niveauSuperieur(Niveau niveau) throws Exception {
-		switch (niveau) {
-			case CP : return (Niveau.CE1);
-			case CE1 : return (Niveau.CE2);
-			case CE2 : return (Niveau.CM1);
-			case CM1 : return (Niveau.CM2);
-			default : throw new Exception("Erreur pas de niveau supérieur");
-		}
-}
+	public void niveauSuperieurEcole() throws Exception {
+		for (int i=0;i<nbClasses;i++) classes[i].niveauSuperieurClasse();
+	}
 }

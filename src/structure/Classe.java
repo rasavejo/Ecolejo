@@ -58,4 +58,8 @@ public class Classe {
 		nbEleves ++;
 	}
 	
+	public void niveauSuperieurClasse() throws Exception {
+		for (int i=0;i<nbEleves;i++) eleves[i].niveauSuperieur();
+	}
+	
 }
