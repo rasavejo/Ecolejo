@@ -30,7 +30,7 @@ public class Eleve extends Humain {
 	}
 	
 	public void ajouterEloignement(Eleve eleve) {
-		if (!estDansEloignement(eleve)) {
+		if ((!estDansEloignement(eleve)) && (eleve.getNiveau() == this.niveau)){
 		eloignement[nbEloignement] = eleve;
 		nbEloignement ++;
 		}
@@ -47,7 +47,7 @@ public class Eleve extends Humain {
 	}
 	
 	public void ajouterRapprochement(Eleve eleve) {
-		if (!estDansRapprochement(eleve)) {
+		if ((!estDansRapprochement(eleve)) && (eleve.getNiveau() == this.niveau)) {
 		rapprochement[nbRapprochement] = eleve;
 		nbRapprochement ++;
 		}
@@ -66,7 +66,7 @@ public class Eleve extends Humain {
 			default : throw new Exception("Erreur pas de niveau supérieur");
 		}
 	}
-
+	
 	public int getNiveauScolaire() {
 		return niveauScolaire;
 	}
@@ -89,5 +89,9 @@ public class Eleve extends Humain {
 
 	public int getNbRapprochement() {
 		return nbRapprochement;
+	}
+
+	public Niveau getNiveau() {
+		return niveau;
 	}
 }
