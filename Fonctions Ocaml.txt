@@ -1,0 +1,9 @@
+let rec longueur l = match l with 
+    [] -> 0
+  | x::m -> 1 + longueur m 
+              
+let rec somme l = match l with 
+    [] -> 0
+  | x::m -> x + somme m
+              
+let moyenne l = somme l / longueur l

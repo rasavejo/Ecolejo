@@ -3,11 +3,11 @@ import personnes.*;
 
 public class Ecole {
 	String nom;
-	Humain directeur;
+	Instituteur directeur;
 	Classe[] classes = new Classe[50];
 	int nbClasses = 0;
 	
-	public Ecole(String nom, Humain directeur) {
+	public Ecole(String nom, Instituteur directeur) {
 		super();
 		this.nom = nom;
 		this.directeur = directeur;
@@ -25,7 +25,7 @@ public class Ecole {
 		return directeur;
 	}
 
-	public void setDirecteur(Humain directeur) {
+	public void setDirecteur(Instituteur directeur) {
 		this.directeur = directeur;
 	}
 	
@@ -33,10 +33,6 @@ public class Ecole {
 	public void ajouterClasse(Classe classe) {
 		classes[nbClasses] = classe;
 		nbClasses ++;
-	}
-	
-	public void niveauSuperieurEcole() throws Exception {
-		for (int i=0;i<nbClasses;i++) classes[i].niveauSuperieurClasse();
 	}
 	
 	private void viderEcole() {
@@ -48,19 +44,16 @@ public class Ecole {
 		boolean possible = false;
 		int i = 0;
 		while (!possible && i<nbClasses) {
-			Niveau niveauEleve = eleve.getNiveau();
 			Classe classe = classes[i];
-			possible =  (niveauEleve == classe.getNiveauPrincipal()) || (niveauEleve == classe.getNiveauSecondaire());
-			possible = possible && classe.estDansEloignement(eleve);
+			possible = classe.ajoutElevePossible(eleve);
 			i ++;
 		}
 		return possible;
 	}
 	
 	private void creerNouvelleClasse(Eleve eleve) {
-		classes[nbClasses] = new Classe(eleve.getNiveau());
-		classes[nbClasses].ajouterEleve(eleve);
-		nbClasses ++;
+		Classe nouvelleClasse  = new Classe(eleve.getNiveau());
+		ajouterClasse(nouvelleClasse);
 	}
 	
 	private boolean ajouterRapprochement(Eleve eleve) {
@@ -77,18 +70,24 @@ public class Ecole {
 		return ajout;
 	}
 	
+	private float calculDifferenceMoyenne(Classe classe,Eleve eleve) {
+		float[] moyennes = classe.calculerMoyennes();
+		float differenceNiveau = Math.abs(moyennes[0] - eleve.getNiveauScolaire());
+		float differenceComportement = Math.abs(moyennes[1] - eleve.getNiveauComportement());
+		return differenceNiveau + differenceComportement;
+	}
+	
 	private void ajouterMoyenne(Eleve eleve) {
 		float differenceMoyenneMax = 0;
 		int indexDifferenceMax = 0;
 		for (int i=0;i<nbClasses;i++) {
 			Classe classe = classes[i];
-			float[] moyennes = classe.calculerMoyennes();
-			float differenceNiveau = Math.abs(moyennes[0] - eleve.getNiveauScolaire());
-			float differenceComportement = Math.abs(moyennes[1] - eleve.getNiveauComportement());
-			float sommeDifference = differenceNiveau + differenceComportement;
-			if (sommeDifference > differenceMoyenneMax) {
-				differenceMoyenneMax = sommeDifference;
-				indexDifferenceMax = i;
+			if (classe.ajoutElevePossible(eleve)) {
+				float sommeDifference = calculDifferenceMoyenne(classe, eleve);
+				if (sommeDifference > differenceMoyenneMax) {
+					differenceMoyenneMax = sommeDifference;
+					indexDifferenceMax = i;
+				}
 			}
 		}
 		classes[indexDifferenceMax].ajouterEleve(eleve);
@@ -104,11 +103,22 @@ public class Ecole {
 		}
 	}
 	
-	public void genererEcole(Eleve[] listeEleves,int nbEleves) {
+	public void genererEcole(Eleve[] listeEleves) {
+		int nbEleves = listeEleves.length;
 		viderEcole();
 		for (int i = 0;i<nbEleves;i++) {
 			Eleve eleve = listeEleves[i];
 			ajouterEleve(eleve);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder message = new StringBuilder();
+		for (int i = 0;i<nbClasses;i++) {
+			message.append(classes[i].toString());
+			message.append("\n");
+		}
+		return message.toString();
 	}
 }

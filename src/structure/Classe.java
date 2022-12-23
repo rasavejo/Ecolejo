@@ -68,6 +68,13 @@ public class Classe {
 	
 	public float[] calculerMoyennes() {
 		float[] moyennes = new float[2];
+		
+		if (nbEleves == 0) {
+			moyennes[0] = 0;
+			moyennes[1] = 0;
+			return moyennes;
+		}
+		
 		float sommeNiveau = 0;
 		float sommeComportement = 0;
 		for (int i = 0;i<nbEleves;i++) {
@@ -78,6 +85,14 @@ public class Classe {
 		moyennes[0] = sommeNiveau / nbEleves;
 		moyennes[1] = sommeComportement / nbEleves;
 		return moyennes;
+	}
+	
+	public boolean ajoutElevePossible(Eleve eleve) {
+		Niveau niveauEleve = eleve.getNiveau();
+		boolean possible =  (niveauEleve == getNiveauPrincipal()) || (niveauEleve == getNiveauSecondaire());
+		possible = possible && ! estDansEloignement(eleve);
+		possible = possible && (nbEleves < 30);
+		return possible;
 	}
 
 	public Niveau getNiveauPrincipal() {
@@ -94,6 +109,16 @@ public class Classe {
 
 	public void setInstituteur(Instituteur instituteur) {
 		this.instituteur = instituteur;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder message = new StringBuilder();
+		for (int i = 0;i<nbEleves;i++) {
+			message.append(eleves[i].getNom());
+			message.append(",");
+		}
+		return message.toString();
 	}
 	
 }
