@@ -35,6 +35,12 @@ public class Ecole {
 		nbClasses ++;
 	}
 	
+	public int getNbEleves() {
+		int total = 0;
+		for (int i = 0;i<nbClasses;i++) total += classes[i].getNbEleves();
+		return total;
+	}
+	
 	private void viderEcole() {
 		classes = new Classe[50];
 		nbClasses = 0;
@@ -53,6 +59,7 @@ public class Ecole {
 	
 	private void creerNouvelleClasse(Eleve eleve) {
 		Classe nouvelleClasse  = new Classe(eleve.getNiveau());
+		nouvelleClasse.ajouterEleve(eleve);
 		ajouterClasse(nouvelleClasse);
 	}
 	

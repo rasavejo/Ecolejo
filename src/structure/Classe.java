@@ -111,6 +111,10 @@ public class Classe {
 		this.instituteur = instituteur;
 	}
 	
+	public int getNbEleves() {
+		return nbEleves;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder message = new StringBuilder();

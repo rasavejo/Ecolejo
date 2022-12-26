@@ -33,6 +33,7 @@ public class Eleve extends Humain {
 		if ((!estDansEloignement(eleve)) && (eleve.getNiveau() == this.niveau)){
 		eloignement[nbEloignement] = eleve;
 		nbEloignement ++;
+		eleve.ajouterEloignement(this);
 		}
 	}
 	
