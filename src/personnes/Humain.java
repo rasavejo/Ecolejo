@@ -1,7 +1,7 @@
 package personnes;
 
 public class Humain {
-	String nom;
+	private String nom;
 	
 	
 	public Humain(String nom) {

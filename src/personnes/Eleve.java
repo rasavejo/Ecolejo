@@ -3,13 +3,13 @@ package personnes;
 import structure.Niveau;
 
 public class Eleve extends Humain {
-	int niveauScolaire;
-	int niveauComportement;
-	Niveau niveau;
-	Eleve[] eloignement = new Eleve[20];
-	Eleve[] rapprochement = new Eleve[20];
-	int nbEloignement = 0;
-	int nbRapprochement = 0;
+	private int niveauScolaire;
+	private int niveauComportement;
+	private Niveau niveau;
+	private Eleve[] eloignement = new Eleve[100];
+	private Eleve[] rapprochement = new Eleve[100];
+	private int nbEloignement = 0;
+	private int nbRapprochement = 0;
 	
 	
 	public Eleve(String nom,Niveau niveau,int niveauScolaire, int niveauComportement) {
@@ -17,6 +17,35 @@ public class Eleve extends Humain {
 		this.niveau = niveau;
 		this.niveauScolaire = niveauScolaire;
 		this.niveauComportement = niveauComportement;
+	}
+	
+	
+	public int getNiveauScolaire() {
+		return niveauScolaire;
+	}
+
+	public void setNiveauScolaire(int niveauScolaire) {
+		this.niveauScolaire = niveauScolaire;
+	}
+
+	public int getNiveauComportement() {
+		return niveauComportement;
+	}
+
+	public void setNiveauComportement(int niveauComportement) {
+		this.niveauComportement = niveauComportement;
+	}
+
+	public int getNbEloignement() {
+		return nbEloignement;
+	}
+
+	public int getNbRapprochement() {
+		return nbRapprochement;
+	}
+
+	public Niveau getNiveau() {
+		return niveau;
 	}
 	
 	public boolean estDansEloignement(Eleve eleve) {
@@ -51,6 +80,7 @@ public class Eleve extends Humain {
 		if ((!estDansRapprochement(eleve)) && (eleve.getNiveau() == this.niveau)) {
 		rapprochement[nbRapprochement] = eleve;
 		nbRapprochement ++;
+		eleve.ajouterRapprochement(this);
 		}
 	}
 	
@@ -68,31 +98,4 @@ public class Eleve extends Humain {
 		}
 	}
 	
-	public int getNiveauScolaire() {
-		return niveauScolaire;
-	}
-
-	public void setNiveauScolaire(int niveauScolaire) {
-		this.niveauScolaire = niveauScolaire;
-	}
-
-	public int getNiveauComportement() {
-		return niveauComportement;
-	}
-
-	public void setNiveauComportement(int niveauComportement) {
-		this.niveauComportement = niveauComportement;
-	}
-
-	public int getNbEloignement() {
-		return nbEloignement;
-	}
-
-	public int getNbRapprochement() {
-		return nbRapprochement;
-	}
-
-	public Niveau getNiveau() {
-		return niveau;
-	}
 }

@@ -2,10 +2,11 @@ package structure;
 import personnes.*;
 
 public class Ecole {
-	String nom;
-	Instituteur directeur;
-	Classe[] classes = new Classe[50];
-	int nbClasses = 0;
+	private String nom;
+	private Instituteur directeur;
+	private Classe[] classes = new Classe[50];
+	private int nbClasses = 0;
+	
 	
 	public Ecole(String nom, Instituteur directeur) {
 		super();
@@ -13,6 +14,7 @@ public class Ecole {
 		this.directeur = directeur;
 	}
 
+	
 	public String getNom() {
 		return nom;
 	}
@@ -68,7 +70,7 @@ public class Ecole {
 		int i = 0;
 		while (!ajout && i < nbClasses) {
 			Classe classe = classes[i];
-			if (classe.estDansRapprochement(eleve)) {
+			if (classe.estDansRapprochement(eleve) && classe.ajoutElevePossible(eleve)) {
 				classe.ajouterEleve(eleve);
 				ajout = true;
 			}
@@ -84,7 +86,7 @@ public class Ecole {
 		return differenceNiveau + differenceComportement;
 	}
 	
-	private void ajouterMoyenne(Eleve eleve) {
+	private void ajouterSelonMoyenne(Eleve eleve) {
 		float differenceMoyenneMax = 0;
 		int indexDifferenceMax = 0;
 		for (int i=0;i<nbClasses;i++) {
@@ -105,7 +107,7 @@ public class Ecole {
 			creerNouvelleClasse(eleve);
 		} else {
 			if (!ajouterRapprochement(eleve)) {
-				ajouterMoyenne(eleve);
+				ajouterSelonMoyenne(eleve);
 			}
 		}
 	}

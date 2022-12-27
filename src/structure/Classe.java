@@ -4,16 +4,38 @@ import personnes.Eleve;
 import personnes.Instituteur;
 
 public class Classe {
-	Niveau niveauPrincipal;
-	Niveau niveauSecondaire; // Pour les classes à double niveau
-	Eleve[] eleves = new Eleve[50];
-	int nbEleves = 0;
-	Instituteur instituteur;
+	private Niveau niveauPrincipal;
+	private Niveau niveauSecondaire; // Pour les classes à double niveau
+	private Eleve[] eleves = new Eleve[50];
+	private int nbEleves = 0;
+	private Instituteur instituteur;
+	private static final int TAILLE_MAX = 30; // Pour la génération automatique d'ecole uniquement
+	
 	
 	public Classe(Niveau niveau) {
-		super();
 		this.niveauPrincipal = niveau;
 	}
+	
+	
+	public Niveau getNiveauPrincipal() {
+		return niveauPrincipal;
+	}
+
+	public Niveau getNiveauSecondaire() {
+		return niveauSecondaire;
+	}
+
+	public Instituteur getInstituteur() {
+		return instituteur;
+	}
+
+	public void setInstituteur(Instituteur instituteur) {
+		this.instituteur = instituteur;
+	}
+	
+	public int getNbEleves() {
+		return nbEleves;
+	}	
 	
 	public void ajouterNiveau(Niveau niveau) {
 		niveauSecondaire = niveau;
@@ -91,29 +113,10 @@ public class Classe {
 		Niveau niveauEleve = eleve.getNiveau();
 		boolean possible =  (niveauEleve == getNiveauPrincipal()) || (niveauEleve == getNiveauSecondaire());
 		possible = possible && ! estDansEloignement(eleve);
-		possible = possible && (nbEleves < 30);
+		possible = possible && (nbEleves < TAILLE_MAX);
 		return possible;
 	}
 
-	public Niveau getNiveauPrincipal() {
-		return niveauPrincipal;
-	}
-
-	public Niveau getNiveauSecondaire() {
-		return niveauSecondaire;
-	}
-
-	public Instituteur getInstituteur() {
-		return instituteur;
-	}
-
-	public void setInstituteur(Instituteur instituteur) {
-		this.instituteur = instituteur;
-	}
-	
-	public int getNbEleves() {
-		return nbEleves;
-	}
 
 	@Override
 	public String toString() {

@@ -1,12 +1,14 @@
 package personnes;
 
 public class Instituteur extends Humain {
-	int anciennete;
+	private int anciennete;
+	
 
 	public Instituteur(String nom, int anciennete) {
 		super(nom);
 		this.anciennete = anciennete;
 	}
+	
 
 	public int getAnciennete() {
 		return anciennete;
