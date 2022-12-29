@@ -9,7 +9,6 @@ public class Ecole {
 	
 	
 	public Ecole(String nom, Instituteur directeur) {
-		super();
 		this.nom = nom;
 		this.directeur = directeur;
 	}
@@ -23,7 +22,7 @@ public class Ecole {
 		this.nom = nom;
 	}
 
-	public Humain getDirecteur() {
+	public Instituteur getDirecteur() {
 		return directeur;
 	}
 
